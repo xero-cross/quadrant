@@ -41,6 +41,12 @@
               <label>아래<input id="bottomInput" maxlength="42" value="사분면 내용 2" /></label>
               <label>왼쪽<input id="leftInput" maxlength="42" value="사분면 내용 3" /></label>
             </div>
+            <label class="grid-toggle">
+              <span>체크 배경</span>
+              <input id="gridToggle" type="checkbox" checked />
+              <span class="toggle-track" aria-hidden="true"></span>
+              <strong id="gridToggleStatus">ON</strong>
+            </label>
           </section>
 
           <section class="control-section">
@@ -111,7 +117,7 @@
         <div class="board-frame">
           <div class="quadrant-board" id="board">
             <div class="board-title" id="boardTitle">제목</div>
-            <div class="plot-grid" aria-hidden="true"></div>
+            <div class="plot-grid" id="plotGrid" aria-hidden="true"></div>
             <div class="axis axis-horizontal" aria-hidden="true"></div>
             <div class="axis axis-vertical" aria-hidden="true"></div>
             <div class="axis-label label-top" id="labelTop">사분면 내용 1</div>

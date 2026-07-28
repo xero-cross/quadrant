@@ -10,6 +10,7 @@ const state = {
     bottom: "사분면 내용 2",
     left: "사분면 내용 3",
   },
+  gridEnabled: true,
   images: [],
   texts: [],
   selectedId: null,
@@ -23,6 +24,7 @@ const imageInput = $("#imageInput");
 const projectInput = $("#projectInput");
 const textInput = $("#textInput");
 const textColorInput = $("#textColorInput");
+const gridToggle = $("#gridToggle");
 
 const inputs = {
   title: $("#titleInput"),
@@ -77,6 +79,14 @@ function syncText() {
 }
 
 Object.values(inputs).forEach((input) => input.addEventListener("input", syncText));
+
+function syncGrid() {
+  state.gridEnabled = gridToggle.checked;
+  $("#plotGrid").classList.toggle("is-off", !state.gridEnabled);
+  $("#gridToggleStatus").textContent = state.gridEnabled ? "ON" : "OFF";
+}
+
+gridToggle.addEventListener("change", syncGrid);
 
 function updateButtons() {
   const disabled = !state.selectedId;
@@ -371,7 +381,12 @@ $("#saveButton").addEventListener("click", () => {
     version: 1,
     title: state.title,
     axisLabels: state.axisLabels,
-    canvas: { width: EXPORT_SIZE, height: EXPORT_SIZE, background: "#fbfaf7" },
+    canvas: {
+      width: EXPORT_SIZE,
+      height: EXPORT_SIZE,
+      background: "#fbfaf7",
+      gridEnabled: state.gridEnabled,
+    },
     images: state.images,
     texts: state.texts,
   };
@@ -414,6 +429,7 @@ projectInput.addEventListener("change", async () => {
 
     state.title = parsed.title;
     state.axisLabels = { ...labels };
+    state.gridEnabled = parsed.canvas?.gridEnabled !== false;
     state.images = parsed.images;
     state.texts = parsed.texts || [];
     state.selectedId = null;
@@ -422,7 +438,9 @@ projectInput.addEventListener("change", async () => {
     inputs.right.value = labels.right;
     inputs.bottom.value = labels.bottom;
     inputs.left.value = labels.left;
+    gridToggle.checked = state.gridEnabled;
     syncText();
+    syncGrid();
     renderAll();
     setStatus("편집 파일을 불러왔습니다.");
   } catch {
@@ -467,13 +485,15 @@ $("#pngButton").addEventListener("click", async () => {
   }
   context.fillText(state.title, size / 2, headerHeight / 2 + 4);
 
-  context.strokeStyle = "#e4e0dc";
-  context.lineWidth = 1;
-  for (let p = headerHeight; p <= size; p += 20) {
-    context.beginPath(); context.moveTo(0, p); context.lineTo(size, p); context.stroke();
-  }
-  for (let p = 0; p <= size; p += 20) {
-    context.beginPath(); context.moveTo(p, headerHeight); context.lineTo(p, size); context.stroke();
+  if (state.gridEnabled) {
+    context.strokeStyle = "#e4e0dc";
+    context.lineWidth = 1;
+    for (let p = headerHeight; p <= size; p += 20) {
+      context.beginPath(); context.moveTo(0, p); context.lineTo(size, p); context.stroke();
+    }
+    for (let p = 0; p <= size; p += 20) {
+      context.beginPath(); context.moveTo(p, headerHeight); context.lineTo(p, size); context.stroke();
+    }
   }
   context.strokeStyle = "#3b2419";
   context.lineWidth = 9;
@@ -535,4 +555,5 @@ $("#panelToggle").addEventListener("click", () => {
 });
 
 window.addEventListener("resize", renderTexts);
+syncGrid();
 renderAll();

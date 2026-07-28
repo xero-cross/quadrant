@@ -66,6 +66,41 @@ input {
   font-weight: 600;
 }
 .axis-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 10px; margin-top: 14px; }
+.grid-toggle {
+  grid-template-columns: 1fr auto auto auto;
+  align-items: center;
+  gap: 9px;
+  margin-top: 16px;
+  cursor: pointer;
+}
+.grid-toggle input { position: absolute; opacity: 0; pointer-events: none; }
+.toggle-track {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  border-radius: 99px;
+  background: #aaa69d;
+  transition: background 160ms ease;
+}
+.toggle-track::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, .22);
+  transition: transform 160ms ease;
+}
+.grid-toggle input:checked + .toggle-track { background: var(--accent); }
+.grid-toggle input:checked + .toggle-track::after { transform: translateX(16px); }
+.grid-toggle input:focus-visible + .toggle-track {
+  outline: 3px solid rgba(230, 84, 46, .28);
+  outline-offset: 2px;
+}
+.grid-toggle strong { min-width: 23px; color: var(--accent); font-size: 11px; }
 .upload-button { width: 100%; padding: 15px; border-style: dashed; font-weight: 800; }
 .upload-button span { color: var(--accent); font-size: 18px; }
 .hint, .canvas-tip { color: var(--muted); font-size: 11px; }
@@ -151,6 +186,7 @@ input {
     linear-gradient(90deg, #e4e0dc 1px, transparent 1px);
   background-size: 1.25% 1.25%;
 }
+.plot-grid.is-off { background-image: none; }
 .axis { position: absolute; z-index: 2; background: var(--axis); }
 .axis-horizontal { top: 56.2%; left: 5%; width: 90%; height: max(4px, .55%); }
 .axis-vertical { top: 19%; left: 49.7%; width: max(4px, .55%); height: 75%; }
