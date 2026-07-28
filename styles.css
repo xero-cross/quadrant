@@ -191,7 +191,9 @@ input {
   color: var(--accent);
   font-size: clamp(16px, 2.3vw, 28px);
   font-weight: 900;
+  pointer-events: none;
 }
+.drop-overlay[hidden] { display: none; }
 .canvas-tip { max-width: 880px; margin: 12px auto 0; text-align: right; }
 .visually-hidden {
   position: absolute;

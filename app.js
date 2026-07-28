@@ -214,18 +214,27 @@ imageInput.addEventListener("change", () => {
   imageInput.value = "";
 });
 
+let dragDepth = 0;
+
 board.addEventListener("dragover", (event) => event.preventDefault());
 board.addEventListener("dragenter", (event) => {
   event.preventDefault();
+  dragDepth += 1;
   $("#dropOverlay").hidden = false;
 });
-board.addEventListener("dragleave", (event) => {
-  if (event.target === board) $("#dropOverlay").hidden = true;
+board.addEventListener("dragleave", () => {
+  dragDepth = Math.max(0, dragDepth - 1);
+  if (dragDepth === 0) $("#dropOverlay").hidden = true;
 });
 board.addEventListener("drop", (event) => {
   event.preventDefault();
+  dragDepth = 0;
   $("#dropOverlay").hidden = true;
   addFiles([...event.dataTransfer.files]);
+});
+window.addEventListener("dragend", () => {
+  dragDepth = 0;
+  $("#dropOverlay").hidden = true;
 });
 
 function deleteSelected() {
