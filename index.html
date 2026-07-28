@@ -37,14 +37,14 @@
             </label>
             <div class="axis-inputs">
               <label>위<input id="topInput" maxlength="42" value="사분면 내용 1" /></label>
-              <label>오른쪽<input id="rightInput" maxlength="42" value="사분면 내용 2" /></label>
-              <label>아래<input id="bottomInput" maxlength="42" value="사분면 내용 3" /></label>
-              <label>왼쪽<input id="leftInput" maxlength="42" value="사분면 내용 4" /></label>
+              <label>오른쪽<input id="rightInput" maxlength="42" value="사분면 내용 4" /></label>
+              <label>아래<input id="bottomInput" maxlength="42" value="사분면 내용 2" /></label>
+              <label>왼쪽<input id="leftInput" maxlength="42" value="사분면 내용 3" /></label>
             </div>
           </section>
 
           <section class="control-section">
-            <div class="section-title"><span>02</span><h2>이미지</h2></div>
+            <div class="section-title"><span>02</span><h2>이미지 / 텍스트</h2></div>
             <button class="upload-button" id="uploadButton" type="button">
               <span>＋</span> 이미지 여러 장 추가
             </button>
@@ -56,6 +56,25 @@
               multiple
             />
             <p class="hint">JPG, PNG, WebP · 파일당 최대 20MB</p>
+            <div class="text-tools">
+              <label>
+                텍스트 내용
+                <input
+                  id="textInput"
+                  type="text"
+                  maxlength="60"
+                  placeholder="예: 홍길동"
+                />
+              </label>
+              <div class="text-compose">
+                <label class="color-field">
+                  글자색
+                  <input id="textColorInput" type="color" value="#e6542e" />
+                </label>
+                <button id="addTextButton" type="button">텍스트 추가</button>
+              </div>
+              <p class="hint">추가한 텍스트를 선택하면 내용과 색상을 다시 수정할 수 있습니다.</p>
+            </div>
             <div class="layer-actions">
               <button id="frontButton" type="button" disabled>맨 앞으로</button>
               <button id="backButton" type="button" disabled>맨 뒤로</button>
@@ -86,7 +105,7 @@
       <section class="workspace" aria-label="사분면 작업 공간">
         <header class="workspace-header">
           <div><p class="eyebrow">LIVE CANVAS</p><h2>배치 미리보기</h2></div>
-          <div class="workspace-meta"><span id="imageCount">0개 이미지</span><span>1:1</span></div>
+          <div class="workspace-meta"><span id="imageCount">0개 요소</span><span>1:1</span></div>
         </header>
 
         <div class="board-frame">
@@ -96,9 +115,9 @@
             <div class="axis axis-horizontal" aria-hidden="true"></div>
             <div class="axis axis-vertical" aria-hidden="true"></div>
             <div class="axis-label label-top" id="labelTop">사분면 내용 1</div>
-            <div class="axis-label label-right" id="labelRight">사분면 내용 2</div>
-            <div class="axis-label label-bottom" id="labelBottom">사분면 내용 3</div>
-            <div class="axis-label label-left" id="labelLeft">사분면 내용 4</div>
+            <div class="axis-label label-right" id="labelRight">사분면 내용 4</div>
+            <div class="axis-label label-bottom" id="labelBottom">사분면 내용 2</div>
+            <div class="axis-label label-left" id="labelLeft">사분면 내용 3</div>
             <div class="drop-overlay" id="dropOverlay" hidden>여기에 이미지를 놓으세요</div>
           </div>
         </div>

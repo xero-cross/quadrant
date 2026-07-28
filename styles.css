@@ -70,6 +70,20 @@ input {
 .upload-button span { color: var(--accent); font-size: 18px; }
 .hint, .canvas-tip { color: var(--muted); font-size: 11px; }
 .hint { margin: 9px 0 0; }
+.text-tools {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 17px;
+  border-top: 1px solid var(--line);
+}
+.text-compose { display: grid; grid-template-columns: 78px 1fr; gap: 8px; align-items: end; }
+.text-compose button { min-height: 41px; font-size: 12px; font-weight: 800; }
+.color-field input[type="color"] {
+  min-height: 41px;
+  padding: 4px;
+  cursor: pointer;
+}
 .layer-actions { display: grid; grid-template-columns: 1fr 1fr .72fr; gap: 7px; margin-top: 15px; }
 .layer-actions button, .export-grid button { padding: 10px 8px; font-size: 12px; font-weight: 750; }
 .danger { color: #a83c27; }
@@ -154,13 +168,32 @@ input {
 .label-top { top: 15.6%; left: 50%; transform: translateX(-50%); text-align: center; }
 .label-bottom { bottom: 1.7%; left: 50%; transform: translateX(-50%); text-align: center; }
 .label-left { top: 57.3%; left: 5%; }
-.label-right { top: 53.3%; right: 5%; text-align: right; }
+.label-right { top: 57.3%; right: 5%; text-align: right; }
 .placed-image { position: absolute; z-index: 4; min-width: 6%; cursor: grab; touch-action: none; }
 .placed-image img { display: block; width: 100%; height: 100%; object-fit: fill; pointer-events: none; }
+.placed-text {
+  position: absolute;
+  z-index: 7;
+  padding: 2px 4px;
+  font-weight: 900;
+  line-height: 1.1;
+  white-space: nowrap;
+  cursor: grab;
+  touch-action: none;
+}
+.placed-text:active, .placed-image:active { cursor: grabbing; }
 .placed-image.is-selected::after {
   content: "";
   position: absolute;
   inset: -3px;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 1px #fff;
+  pointer-events: none;
+}
+.placed-text.is-selected::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
   border: 2px solid var(--accent);
   box-shadow: 0 0 0 1px #fff;
   pointer-events: none;
@@ -170,6 +203,21 @@ input {
   z-index: 3;
   right: -9px;
   bottom: -9px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .22);
+  cursor: nwse-resize;
+  touch-action: none;
+}
+.text-resize-handle {
+  position: absolute;
+  z-index: 3;
+  right: -10px;
+  bottom: -10px;
   width: 20px;
   height: 20px;
   padding: 0;
